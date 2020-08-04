@@ -13,7 +13,7 @@ public class ConsumerApplication {
         // 这次我们使用了OkHttp客户端,只需要注入工厂即可
         return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
     }
-
+    // spring启动程序
     public static void main(String[] args) {
         SpringApplication.run(ConsumerApplication.class, args);
     }
