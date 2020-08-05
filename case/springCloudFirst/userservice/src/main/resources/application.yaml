@@ -8,5 +8,14 @@ spring:
     hikari:
       maximum-pool-size: 20
       minimum-idle: 10
+  application:
+    name: userservice # 应用名称
 mybatis:
   type-aliases-package: com.yz.userservice.userservice.domain
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 192.168.3.36
