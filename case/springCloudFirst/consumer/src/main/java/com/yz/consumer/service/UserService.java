@@ -33,8 +33,8 @@ public class UserService {
         ServiceInstance serviceInstance = instances.get(0);
 
         // 获取ip和端口信息
-        String baseUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/";
-
+        // String baseUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/";
+        String baseUrl = "http://userservice/user/";
         for (Long id :  ids) {
             User user = restTemplate.getForObject(baseUrl + id, User.class);
             users.add(user);
