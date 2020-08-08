@@ -13,30 +13,30 @@ import java.util.List;
 
 @Service
 public class UserService {
+    @Autowired
+    private UserDao userDao;
+
 //    @Autowired
-//    private UserDao userDao;
+//    private RestTemplate restTemplate;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private DiscoveryClient discoveryClient;
+//    @Autowired
+//    private DiscoveryClient discoveryClient;
 
     public List<User> queryUserByIds(List<Long> ids){
         List<User> users = new ArrayList<>();
 
         // String baseUrl = "http://localhost:8081/user/";
         // 根据服务名称，获取服务实例
-        List<ServiceInstance> instances = discoveryClient.getInstances("userservice");
+        // List<ServiceInstance> instances = discoveryClient.getInstances("userservice");
         // 因为只有一个UserService,因此我们直接get(0)获取
 
-        ServiceInstance serviceInstance = instances.get(0);
+        // ServiceInstance serviceInstance = instances.get(0);
 
         // 获取ip和端口信息
         // String baseUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/";
-        String baseUrl = "http://userservice/user/";
+        // String baseUrl = "http://userservice/user/";
         for (Long id :  ids) {
-            User user = restTemplate.getForObject(baseUrl + id, User.class);
+            User user = userDao.queryUserById(id);
             users.add(user);
         }
         return users;

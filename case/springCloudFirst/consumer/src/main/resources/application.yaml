@@ -3,10 +3,29 @@ server:
 spring:
   application:
     name: consumer # 应用名称
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true # 开启Spring Cloud的重试功能
+userservice:
+  ribbon:
+    ConnectTimeout: 1000 # Ribbon的连接超时时间
+    ReadTimeout: 1000 # Ribbon的数据读取超时时间
+    OkToRetryOnAllOperations: false # 是否对所有操作都进行重试
+    MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
+    MaxAutoRetries: 1 # 对当前实例的重试次数
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 192.168.3.36
+    ip-address: 172.16.155.67
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000 # 设置hystrix的超时时间为6000ms
