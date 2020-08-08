@@ -1,5 +1,6 @@
 package com.yz.consumer.service;
 
+import com.yz.consumer.dao.UserFeignClient;
 import org.springframework.cloud.client.discovery.DiscoveryClient;;
 import com.yz.consumer.dao.UserDao;
 import com.yz.consumer.domain.User;
@@ -13,14 +14,16 @@ import java.util.List;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserDao userDao;
+//    @Autowired
+//    private UserDao userDao;
 
 //    @Autowired
 //    private RestTemplate restTemplate;
 
 //    @Autowired
 //    private DiscoveryClient discoveryClient;
+    @Autowired
+    private UserFeignClient userFeignClient;
 
     public List<User> queryUserByIds(List<Long> ids){
         List<User> users = new ArrayList<>();
@@ -36,7 +39,7 @@ public class UserService {
         // String baseUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/";
         // String baseUrl = "http://userservice/user/";
         for (Long id :  ids) {
-            User user = userDao.queryUserById(id);
+            User user = userFeignClient.queryUserById(id);
             users.add(user);
         }
         return users;

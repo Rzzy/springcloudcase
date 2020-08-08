@@ -13,26 +13,27 @@ import org.slf4j.Logger;
 
 @Component
 public class UserDao {
-    @Autowired
-    private RestTemplate restTemplate;
 
-    @Autowired
-    private DiscoveryClient discoveryClient;
+    // @Autowired
+    // private RestTemplate restTemplate;
 
-    private static final Logger logger =  LoggerFactory.getLogger(UserDao.class);
+    // @Autowired
+    // private DiscoveryClient discoveryClient;
 
-    @HystrixCommand(fallbackMethod = "queryUserByIdFallBack")
-    public User queryUserById(Long id){
-        Long begin = System.currentTimeMillis();
+    // private static final Logger logger =  LoggerFactory.getLogger(UserDao.class);
+
+   // @HystrixCommand(fallbackMethod = "queryUserByIdFallBack")
+   // public User queryUserById(Long id){
+   //     Long begin = System.currentTimeMillis();
         // 获取ip和端口信息
         // String baseUrl = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/";
-        String baseUrl = "http://userservice/user/"+ id ;
-        User user = restTemplate.getForObject(baseUrl,User.class);
-        Long end = System.currentTimeMillis();
+   //     String baseUrl = "http://userservice/user/"+ id ;
+        // User user = restTemplate.getForObject(baseUrl,User.class);
+   //     Long end = System.currentTimeMillis();
         /* 记录访问用时 */
-        logger.info("访问用时：{}",end - begin);
-        return user;
-    }
+        // logger.info("访问用时：{}",end - begin);
+        // return user;
+   // }
 
     public User queryUserByIdFallBack(Long id) {
         User user = new User();
