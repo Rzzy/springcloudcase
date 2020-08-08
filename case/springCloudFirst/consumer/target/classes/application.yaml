@@ -21,11 +21,21 @@ eureka:
       defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 172.16.155.67
+    ip-address: 192.168.3.36
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 4000 # 设置hystrix的超时时间为6000ms
+            timeoutInMilliseconds: 6000 # 设置hystrix的超时时间为6000ms
+feign:
+  hystrix:
+    enabled: true # 开启feign的熔断功能
+  compression:
+    request:
+      enabled: true # 开启请求压缩
+      mime-types: text/html,application/xml,application/json # 设置压缩的数据类型
+      min-request-size: 2048 # 设置触发压缩的大小下限
+    response:
+      enabled: true # 开启响应压缩
