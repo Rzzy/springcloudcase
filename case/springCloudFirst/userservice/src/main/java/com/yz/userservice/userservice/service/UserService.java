@@ -14,7 +14,7 @@ public class UserService {
     private UserMapper userMapper;
 
     public User queryById(Long id) throws InterruptedException {
-        Thread.sleep(new Random().nextInt(4000));
+        // Thread.sleep(new Random().nextInt(4000));
         return this.userMapper.selectByPrimaryKey(id);
     }
 }
