@@ -10,6 +10,7 @@ zuul:
       # url: http://127.0.0.1:8081 # 映射路径对应的实际url地址
       serviceId: userservice # 指定服务名称
   prefix: /api # 添加路由前缀
+  retryable: true
 eureka:
   client:
     registry-fetch-interval-seconds: 5 # 获取服务列表的周期：5s
@@ -18,3 +19,10 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 6000 # 熔断超时时长：6000ms
