@@ -15,6 +15,8 @@ eureka:
 zuul:
   prefix: /api
   retryable: true # t添加路由前缀
+  routes:
+    item-service: /item/** # 将商品微服务映射到/item/**
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)
   ReadTimeout: 2000 # 通信超时时间(ms)
